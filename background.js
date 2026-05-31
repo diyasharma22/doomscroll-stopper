@@ -70,8 +70,10 @@ chrome.tabs.onRemoved.addListener(async () => {
 
 async function saveActiveTime() {
   if (!activeTab || !activeStart) return;
-  const elapsed = Math.floor((Date.now() - activeStart) / 1000 / 60);
-  if (elapsed <= 0) return;
+
+  // Calculate elapsed time in seconds (not minutes) for accuracy
+  const elapsedSeconds = Math.floor((Date.now() - activeStart) / 1000);
+  if (elapsedSeconds < 5) return; // ignore if less than 5 seconds
 
   const today = getTodayKey();
   const key = `time_${today}`;
@@ -79,20 +81,29 @@ async function saveActiveTime() {
   const times = result[key] || {};
   const limits = result.limits || DEFAULT_LIMITS;
 
-  times[activeTab.domain] = (times[activeTab.domain] || 0) + elapsed;
+  // Store in seconds internally, show as minutes in UI
+  const currentSeconds = times[`${activeTab.domain}_seconds`] || 0;
+  const newSeconds = currentSeconds + elapsedSeconds;
+  times[`${activeTab.domain}_seconds`] = newSeconds;
+  
+  // Convert to minutes for display (rounded)
+  times[activeTab.domain] = Math.ceil(newSeconds / 60);
+
   await chrome.storage.local.set({ [key]: times });
 
   const limit = limits[activeTab.domain] || 20;
-  if (times[activeTab.domain] >= limit) {
+  if (times[activeTab.domain] >= limit && times[activeTab.domain] - Math.ceil(elapsedSeconds/60) < limit) {
     chrome.notifications.create({
       type: "basic",
       iconUrl: "icons/icon48.png",
-      title: "Doomscroll Stopper",
+      title: "Doomscroll Stopper 🛑",
       message: `You've spent ${times[activeTab.domain]} mins on ${activeTab.domain} today. Time for a break!`
     });
   }
 
+  // Reset start time to now
   activeStart = Date.now();
 }
 
-setInterval(saveActiveTime, 60000);
+// Save every 10 seconds for accurate real-time tracking
+setInterval(saveActiveTime, 10000);
