@@ -9,7 +9,7 @@
 ## 📸 Screenshots
 
 ### ⚠️ Break Reminder Overlay
-![Overlay](screenshots/overlay.jpg)
+![Overlay](screenshots/overlay.webp)
 
 ### 📊 Dashboard
 ![Dashboard 1](screenshots/dashboard-1.webp)
