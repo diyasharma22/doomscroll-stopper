@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doomscroll Stopper</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <div class="header">
+    <span class="logo">🛑</span>
+    <h1>Doomscroll Stopper</h1>
+  </div>
+
+  <div class="today-section">
+    <h2>Today's Usage</h2>
+    <div id="site-list">
+      <p class="loading">Loading...</p>
+    </div>
+  </div>
+
+  <div class="total-row">
+    <span>Total today</span>
+    <span id="total-time">0 mins</span>
+  </div>
+
+  <div class="actions">
+    <button id="dashboard-btn">📊 Full Dashboard</button>
+    <button id="reset-btn">🔄 Reset Today</button>
+  </div>
+
+  <div class="footer">
+    <span id="status-msg">Tracking active ✅</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
