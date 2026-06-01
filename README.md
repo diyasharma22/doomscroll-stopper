@@ -9,11 +9,11 @@
 ## 📸 Screenshots
 
 ### ⚠️ Break Reminder Overlay
-![Overlay](screenshots/overlay.webp)
+![Overlay](screenshots/overlay.jpeg)
 
 ### 📊 Dashboard
-![Dashboard 1](screenshots/dashboard-1.webp)
-![Dashboard 2](screenshots/dashboard-2.webp)
+![Dashboard 1](screenshots/dashboard-1.jpeg)
+![Dashboard 2](screenshots/dashboard-2.jpeg)
 
 ## ✨ Features
 - 🕐 Tracks time spent on Instagram, YouTube, Twitter, Reddit, Facebook, TikTok
